@@ -21,7 +21,7 @@ const getSubgroups = async (groupId) => {
 
 const createSubgroup = async (parentId, groupName, groupPath) => {
   try {
-    const response = await axios.post(
+    await axios.post(
       `${GITLAB_API}${GROUPS_ENDPOINT}`,
       {
         name: groupName,
