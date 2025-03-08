@@ -10,11 +10,6 @@ const WDPRO_BATCH5_GID = 103342863;
  *  this was tested using token with scope `api`
 */
 
-const headers = {
-  Authorization: "Bearer <personal_api_token>",
-};
-
-
 
 /**
  *  Change for each repo you want to create under Student's subgroup
