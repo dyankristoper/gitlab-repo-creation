@@ -1,9 +1,10 @@
 const axios = require("axios").default;
+const { getAuthorizationHeader } = require('../utils/helpers');
+
 const GITLAB_API = "https://gitlab.com/api/v4";
 const GROUPS_ENDPOINT = "/groups";
-const headers = {
-    Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-  };
+
+const headers = getAuthorizationHeader();
 
 const getSubgroups = async (groupId) => {
   try {
@@ -12,11 +13,7 @@ const getSubgroups = async (groupId) => {
       { headers }
     );
     const subgroupArray = response.data;
-    // console.log(response);
     return subgroupArray;
-    // for (const subgroup of subgroupArray) {
-    //   console.log(`${subgroup.name} groupId is: ${subgroup.id}`);
-    // }
   } catch (err) {
     console.error(err);
   }
@@ -24,7 +21,7 @@ const getSubgroups = async (groupId) => {
 
 const createSubgroup = async (parentId, groupName, groupPath) => {
   try {
-    const response = await axios.post(
+    await axios.post(
       `${GITLAB_API}${GROUPS_ENDPOINT}`,
       {
         name: groupName,
