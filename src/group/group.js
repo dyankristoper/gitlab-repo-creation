@@ -2,7 +2,7 @@ const axios = require("axios").default;
 const GITLAB_API = "https://gitlab.com/api/v4";
 const GROUPS_ENDPOINT = "/groups";
 const headers = {
-    Authorization: "Bearer glpat-v4oPy3dx6mt5VV8dxs4a",
+    Authorization: `Bearer ${ process.env.ACCESS_TOKEN }`,
   };
 
 const getSubgroups = async (groupId) => {
