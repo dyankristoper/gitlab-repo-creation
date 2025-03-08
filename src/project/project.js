@@ -1,11 +1,12 @@
 const axios = require("axios").default;
+
 const group = require("../group/group");
+const { getAuthorizationHeader } = require('../utils/helpers');
 
 const GITLAB_API = "https://gitlab.com/api/v4";
 const PROJECTS_ENDPOINT = "/projects";
-const headers = {
-  Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-};
+
+const headers = getAuthorizationHeader();
 
 const createRepository = async (
   namespaceId,
@@ -41,13 +42,14 @@ const createProjectsOnSubGroups = async (
   repositoryPath,
   description
 ) => {
-  console.log("trying to fetch subgroups");
+  console.log(`${ new Date() } -- Trying to fetch subgroups`);
   const studentGroups = await group.getSubgroups(groupId);
 
-  console.log("iterating through results");
+  console.log(`${ new Date() } -- Iterating through results`);
+
   for (const studentGroup of studentGroups) {
     if (studentGroup.id !== 15420965 && studentGroup.id !== 15380661) {
-      console.log(`Creating for ${studentGroup.name} : ${studentGroup.id}`);
+      console.log(`${ new Date() } -- Creating for ${studentGroup.name} : ${studentGroup.id}`);
       await createRepository(
         studentGroup.id,
         repositoryName,
